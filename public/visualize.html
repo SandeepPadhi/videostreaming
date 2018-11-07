@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+            <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+
+<style>
+
+#container{
+    width:100vw;
+    height: 100vh;
+    background: lightblue;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 10px 10px 10px 10px;
+
+}    
+
+#head{
+background: khaki;
+color: lightslategray;
+font-size:20px;
+width: 100vw;
+position: relative;
+text-align: center;
+border: 10px solid darkolivegreen;
+
+}
+
+#room_container{
+position: relative;
+margin-top: 2vh;
+display:flex;
+background: limegreen;
+/*justify-content:left;*/
+flex-flow: left;
+align-items: center;
+width:100vw;
+
+
+}
+#roomno{
+
+    position:relative;
+    width:70vw;
+    height: 5vh;
+    border: 5px solid darkslategrey;
+    font-size: 4vh;
+    color:gray;
+
+}
+
+#roombutton{
+position:relative;
+width:30vw;
+color:olivedrab;
+background: wheat;
+height: 5vh;
+font-size:30px;
+
+
+}
+
+
+#live{
+
+width:100vw;
+height: 70vh;
+display:flex;
+margin-top: 2vh;
+padding:40px 40px 40px 40px;    
+background: darkgrey;
+border:5px solid blue;
+
+}
+
+#live>#play{
+    
+    position:relative;
+    width:100vw;
+    height: 70vh;
+    border:5px solid blue;
+    background: cyan;
+}
+
+#roombutton:hover{
+    color:lightgreen;
+    background: lightsteelblue;
+    font-size: 20px;
+
+}
+
+
+
+</style>
+
+
+    </head>
+    <body>
+
+        <div id="container">
+            <div id="head">        
+                <h1>Live Feed</h1>
+            </div>
+            <div id="room_container">
+                
+                    <input type="text" id="roomno" >
+                    <button id="roombutton" value="room id">Enter room</button>
+            </div>    
+
+            <div id="live">       
+                 <img id="play">
+            </div>
+
+        </div>
+
+       
+        <div id="logger"></div>
+    </body>
+<script type="text/javascript">
+var count=0;
+var socket = io();
+
+$(function(){
+
+    $("#roombutton").click(function(){
+       console.log("button clicked..!!!");
+        var id=$("#roomno").val();
+        console.log("room no:"+id);
+        socket.emit('join', {email: id ,message:"hello"});
+
+
+
+        socket.on('stream',function(image){
+            count=count+1;
+            //console.log(image);
+            console.log("receiving streaming..!!   "+count);
+            $('#play').attr('src',image.image);
+            console.log("room id:"+image.email);
+
+            //$('#logger').text(image);
+            //console.log(image);
+        });
+
+    });
+
+
+});
+
+//socket.emit('join', {email: "sandeep",message:"hello"});
+
+        
+
+</script>
+</html>

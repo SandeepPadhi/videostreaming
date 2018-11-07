@@ -1,0 +1,21 @@
+{
+  "name": "videostreaming",
+  "version": "1.0.0",
+  "description": "this is my videostreaming ap[",
+  "main": "./app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Sandeep Padhi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "socket.io": "^2.1.1"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "devDependencies": {}
+}

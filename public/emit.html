@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+            <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+            <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    </head>
+
+<style>
+
+        
+
+                #container{
+                    width:100vw;
+                    height: 100vh;
+                    background: lightblue;
+                    display:flex;
+                    flex-direction:column;
+                    align-items: center;
+                
+                }    
+                
+                #head{
+                background: khaki;
+                color: lightslategray;
+                font-size:20px;
+                width: 100vw;
+                position: relative;
+                text-align: center;
+                border: 10px solid darkolivegreen;
+                
+                }
+                
+                #room_container{
+                position: relative;
+                margin-top: 2vh;
+                display:flex;
+                background: limegreen;
+                /*justify-content:left;*/
+                flex-flow: left;
+                align-items: center;
+                width:100vw;
+                
+                
+                }
+                #roomno{
+                
+                    position:relative;
+                    width:70vw;
+                    height: 5vh;
+                    border: 5px solid darkslategrey;
+                    font-size: 4vh;
+                    color:gray;
+                    
+                }
+                
+                #roombutton{
+                position:relative;
+                width:30vw;
+                color:olivedrab;
+                background: wheat;
+                height: 5vh;
+                font-size:30px;
+                
+                
+                }
+                
+                
+                #live{
+                
+                width:100vw;
+                height: 70vh;
+                display:flex;
+                margin-top: 2vh;
+                padding:40px 40px 40px 40px;    
+                background: darkgrey;
+                border:5px solid blue;
+                
+                }
+                
+              .play{
+                    
+                    position:relative;
+                    width:100vw;
+                    height: 70vh;
+                    border:5px solid blue;
+                    background: cyan;
+                }
+                
+                #roombutton:hover{
+                    color:darkslateblue;
+                    background: lightsteelblue;
+                    font-size: 30px;
+                
+                }
+                
+
+</style>    
+
+
+
+    <body>
+
+
+<div id="container">
+        <div id="head">        
+                <h1>Create Room</h1>
+        </div>
+
+        <div id="room_container">
+                
+                <input type="text" placeholder="Enter Room id" id="roomno" >
+                <button id="roombutton" value="room id">Enter  room  id</button>
+        </div>    
+        <div id="live">     
+              
+                <!--<img id="play">-->
+
+
+                <!--<canvas style="display:block;width:10vw;height:10vw;" id="preview"></canvas>  -->
+                <canvas  class="play "id="preview"></canvas>
+
+                
+        </div>
+
+
+
+
+    </div>
+
+    <video src="" id="video" style="width:10vw ;height:10vw;display:none;" autoplay="true"></video>
+
+    <div id="logger">hello</div>
+
+       <!-- <input type="text" id="roomno">
+        <button id="roombutton" value="Room id">Room id</button>
+       -->
+
+       
+    </body>
+<script type="text/javascript">
+    var canvas = document.getElementById("preview");
+    var context = canvas.getContext('2d');
+
+    //canvas.width = 1000 ;
+    //canvas.height = 100 ;
+
+    context.width = canvas.width;
+    context.height = canvas.height;
+
+    var video = document.getElementById("video");
+
+    var socket = io();
+    //socket.emit('join', {email: "sandeep",message:"hello"});
+
+
+    function logger(msg){
+        console.log("loading...!!! message");
+        $('#logger').text(msg);
+    }
+
+    function loadCamera(stream){
+        console.log("loading camerea..!!!");
+        video.src = window.URL.createObjectURL(stream);
+        logger("Camera connected");
+    }
+
+    function loadFail(){
+        console.log("camera failed..!!");
+        logger("Camera not connected");
+    }
+
+    function viewVideo(video,context){
+
+        console.log("viewVideo");
+       context.drawImage(video,0,0,context.width,context.height);
+        //socket.emit('stream',canvas.toDataURL('image/webp'));
+        socket.emit('stream',{email:$("#roomno").val(),image:canvas.toDataURL('image/webp')});
+      //  socket.emit('stream',{email:"123456890",image:canvas.toDataURL('image/webp')});
+
+
+
+    }
+
+    $(function(){
+
+
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        .then(stream => video.srcObject = stream)
+        .catch(e => console.log(e.name + ": "+ e.message));
+
+
+       /* navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia || navigator.msgGetUserMedia ||navigator.mediaDevices.getUserMedia);
+    
+        if(navigator.getUserMedia){
+            navigator.mediaDevices.getUserMedia({video: true, audio: false},loadCamera,loadFail);
+        }
+*/
+        
+
+        $("#roombutton").click(function(){
+
+            var id=$("#roomno").val();
+            console.log("room no is "+id);
+            socket.emit('join',{email:id});
+
+            
+            setInterval(function(){
+                viewVideo(video,context);
+            },7);
+            
+                    });
+
+        });
+
+
+</script>
+</html>
+
+
+
+
