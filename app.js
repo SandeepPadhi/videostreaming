@@ -8,8 +8,12 @@ var port = process.env.port || 3000;
 
 app.use(express.static(__dirname + "/public" ));
 
-app.get('/',function(req,res){
+app.get('/in',function(req,res){
+    //console.log("entered  index page...");
     var pth=path.join(__dirname,"/public/index.html");
+    console.log("entered  index page...");
+
+
     res.sendFile(pth);
     //res.redirect("index.html");
 });
@@ -77,5 +81,5 @@ console.log("Server running at port "+ port);
 
 
 http.listen(port,function(){
-    console.log("Server running at port "+ port);
+    console.log("Server running at.. port "+ port);
     });
