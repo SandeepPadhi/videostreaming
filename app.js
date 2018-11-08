@@ -232,4 +232,7 @@ git remote add yourgitname "REPOSITORYURL from github"    -- this will create a 
 git remote set-url yourgitname "REPOSITORYURL" from github  -- this will set url for the git yourgitname which already exist
 git remote -v
 
+
+https://medium.com/@mlbors/first-node-app-on-heroku-46e182eae3fc
+
     */
