@@ -97,13 +97,25 @@ http.listen(port,hostname,function(){
 
 
 
-const http = require('http')
+//const http = require('http')
 const url = require('url')
 
+
+var app = new express();
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
 //const service = require('./service')
 
 const hostname = '0.0.0.0';
 const port = process.env.PORT || 3000
+
+
+
+
+
+/*
+
+
 
 const server = http.createServer((req, res) => {
 
@@ -122,3 +134,18 @@ const server = http.createServer((req, res) => {
 }).listen(port, hostname, function(){
   console.log('Server running at http://${' + hostname + '}:${' + port + '}/');
 })
+
+*/
+
+
+app.get("/",function(req,res){
+
+
+    res.send("my first video");
+});
+
+
+http.listen(port,hostname,function(){
+    console.log("Server running at port "+ port);
+    });
+    
