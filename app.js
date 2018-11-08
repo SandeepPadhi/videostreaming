@@ -100,7 +100,7 @@ http.listen(port,hostname,function(){
 const http = require('http')
 const url = require('url')
 
-const service = require('./service')
+//const service = require('./service')
 
 const hostname = '0.0.0.0';
 const port = process.env.PORT || 3000
