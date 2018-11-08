@@ -147,7 +147,7 @@ app.get("/",function(req,res){
 
     //res.send("my first video");
 
-    var pth=path.join(__dirname,"/public/index.html");
+   // var pth=path.join(__dirname,"/public/index.html");
     console.log("entered  index page...");
 
     res.send("videochat..!!!");
