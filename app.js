@@ -106,12 +106,14 @@ const url = require('url')
 var app = new express();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
+var path=require("path");
+
 //const service = require('./service')
 
 const hostname = '0.0.0.0';
-const port = process.env.PORT || 3000
+var port = process.env.port || 3000;
 
-
+app.use(express.static(__dirname + "/public" ));
 
 
 
@@ -143,7 +145,14 @@ const server = http.createServer((req, res) => {
 app.get("/",function(req,res){
 
 
-    res.send("my first video");
+    //res.send("my first video");
+
+    var pth=path.join(__dirname,"/public/index.html");
+    console.log("entered  index page...");
+
+    //res.send("videochat..!!!");
+    res.sendFile(pth);
+    //res.redirect("index.html");
 });
 
 
