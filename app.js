@@ -1,6 +1,6 @@
 var express = require("express");
 var app = new express();
-var http = require("https").Server(app);
+var http = require("http").Server(app);
 var io = require("socket.io")(http);
 var path=require("path");
 
@@ -13,8 +13,8 @@ app.get('/in',function(req,res){
     var pth=path.join(__dirname,"/public/index.html");
     console.log("entered  index page...");
 
-
-    res.sendFile(pth);
+    res.send("videochat..!!!");
+    //res.sendFile(pth);
     //res.redirect("index.html");
 });
 
@@ -78,8 +78,10 @@ console.log("Server running at port "+ port);
 });
 
 */
+const hostname = '0.0.0.0';
 
 
-http.listen(port,function(){
+http.listen(port,hostname,function(){
     console.log("Server running at.. port "+ port);
+    
     });
