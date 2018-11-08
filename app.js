@@ -96,13 +96,19 @@ http.listen(port,hostname,function(){
 
 
 
-const http = require('http')
+//const http = require('http')
 const url = require('url')
-
+var express = require("express");
+var app = new express();
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
+var path=require("path");
 //const service = require('./service')
 
 const hostname = '0.0.0.0';
 const port = process.env.PORT || 3000
+
+/*
 
 const server = http.createServer((req, res) => {
 
@@ -117,12 +123,37 @@ const server = http.createServer((req, res) => {
     //res.write("Happy Diwali");
     //res.end();
   res.writeHead(200, {'Content-Type': 'application/html'})    
-
+  
   res.sendFile("./public/index.html")
     
 
   }
 
+
+  
 }).listen(port, hostname, function(){
   console.log('Server running at http://${' + hostname + '}:${' + port + '}/');
 })
+
+
+
+*/
+
+
+
+app.use(express.static(__dirname + "/public" ));
+
+app.get('/in',function(req,res){
+    //console.log("entered  index page...");
+    var pth=path.join(__dirname,"/public/index.html");
+    console.log("entered  index page...");
+
+    res.send("videochat..!!!");
+    //res.sendFile(pth);
+    //res.redirect("index.html");
+});
+
+http.listen(port,hostname,function(){
+    console.log("Server running at.. port "+ port);
+    
+    });
