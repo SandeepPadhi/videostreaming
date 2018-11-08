@@ -145,12 +145,12 @@ const server = http.createServer((req, res) => {
 app.get("/",function(req,res){
 
 
-    //res.send("my first video");
+    res.send("my first video");
 
    // var pth=path.join(__dirname,"/public/index.html");
-    console.log("entered  index page...");
+    //console.log("entered  index page...");
 
-    res.send("videochat..!!!");
+    //res.send("videochat..!!!");
     //res.sendFile(pth);
     //res.redirect("index.html");
 });
