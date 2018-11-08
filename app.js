@@ -196,7 +196,7 @@ app.get("/visualize",function(req,res){
             //io.emit('stream',image);
     
        framecount=framecount+1;
-        if(framecount%6==0){
+        if(framecount%3==0){
             
             io.sockets.in(image.email).emit("stream",image);//here "sandeep"  represents room name..!!!
        }
