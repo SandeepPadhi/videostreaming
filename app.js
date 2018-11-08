@@ -211,3 +211,23 @@ http.listen(port,hostname,function(){
     console.log("Server running at.. port "+ port);
     
     });
+
+
+
+    /*
+
+
+git add .
+git commit -m "message"
+git push videostream master
+git push heroku master
+heroku login
+heroku create
+heroku logs --tail
+heroku ps:scale web=1
+heroku open
+git remote add yourgitname "REPOSITORYURL from github"    -- this will create a git with name yourgitname
+git remote set-url yourgitname "REPOSITORYURL" from github  -- this will set url for the git yourgitname which already exist
+
+
+    */
