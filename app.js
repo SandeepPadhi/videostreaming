@@ -116,6 +116,8 @@ const server = http.createServer((req, res) => {
     //res.write("Hello heroku from Sandeep..!!!");
     //res.write("Happy Diwali");
     //res.end();
+  res.writeHead(200, {'Content-Type': 'application/html'})    
+
   res.sendFile("./public/index.html")
     
 
