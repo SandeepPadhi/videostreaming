@@ -148,10 +148,29 @@ app.get('/in',function(req,res){
     var pth=path.join(__dirname,"/public/index.html");
     console.log("entered  index page...");
 
-    res.send("videochat..!!!");
-    //res.sendFile(pth);
+    //res.send("videochat..!!!");
+    res.sendFile(pth);
     //res.redirect("index.html");
 });
+
+
+
+app.get("/emit",function(req,res){
+    console.log("emit");
+var pth=path.join(__dirname,"/public/emit.html");
+    res.sendFile(pth);
+
+
+});
+
+
+app.get("/visualize",function(req,res){
+    console.log("visualize");
+    var pth=path.join(__dirname,"/public/visualize.html");
+        res.sendFile(pth);
+    
+    
+    });
 
 http.listen(port,hostname,function(){
     console.log("Server running at.. port "+ port);
