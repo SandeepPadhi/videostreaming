@@ -217,6 +217,8 @@ http.listen(port,hostname,function(){
     /*
 
 
+this page's git name is videostream
+
 git add .
 git commit -m "message"
 git push videostream master
@@ -228,6 +230,6 @@ heroku ps:scale web=1
 heroku open
 git remote add yourgitname "REPOSITORYURL from github"    -- this will create a git with name yourgitname
 git remote set-url yourgitname "REPOSITORYURL" from github  -- this will set url for the git yourgitname which already exist
-
+git remote -v
 
     */
