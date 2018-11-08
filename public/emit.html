@@ -86,8 +86,8 @@
               .play{
                     
                     position:relative;
-                    width:1vw;
-                    height: 1vh;
+                    width:100vw;
+                    height: 70vh;
                     border:5px solid blue;
                     background: cyan;
                 }
@@ -123,7 +123,7 @@
 
 
                 <!--<canvas style="display:block;width:10vw;height:10vw;" id="preview"></canvas>  -->
-                <canvas  class="play "id="preview"></canvas>
+                <canvas  class="play" id="preview"></canvas>
 
                 
         </div>
@@ -134,6 +134,8 @@
     </div>
 
     <video src="" id="video" style="width:1vw ;height:1vw;display:none;" autoplay="true"></video>
+    <canvas  class="play" id="preview2" style="display:none;width:1vw;height:1vh;"></canvas>
+
 
     <div id="logger">hello</div>
 
@@ -147,11 +149,22 @@
     var canvas = document.getElementById("preview");
     var context = canvas.getContext('2d');
 
+    var canvas2 = document.getElementById("preview2");
+    var context2 = canvas2.getContext('2d');
+
+
+
     //canvas.width = 1000 ;
     //canvas.height = 100 ;
 
     context.width = canvas.width;
     context.height = canvas.height;
+
+
+
+    context2.width=canvas2.width;
+    context2.height=canvas2.height;
+
 
     var video = document.getElementById("video");
 
@@ -179,8 +192,13 @@
 
         console.log("viewVideo");
        context.drawImage(video,0,0,context.width,context.height);
+
         //socket.emit('stream',canvas.toDataURL('image/webp'));
-        socket.emit('stream',{email:$("#roomno").val(),image:canvas.toDataURL('image/webp')});
+        context2.drawImage(video,0,0,context2.width,context2.height);
+
+        //socket.emit('stream',{email:$("#roomno").val(),image:canvas.toDataURL('image/webp')});
+        socket.emit('stream',{email:$("#roomno").val(),image:canvas2.toDataURL('image/webp')});
+
       //  socket.emit('stream',{email:"123456890",image:canvas.toDataURL('image/webp')});
 
 
@@ -221,6 +239,7 @@
 
 
 </script>
+
 </html>
 
 
