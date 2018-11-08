@@ -150,8 +150,8 @@ app.get("/",function(req,res){
     var pth=path.join(__dirname,"/public/index.html");
     console.log("entered  index page...");
 
-    //res.send("videochat..!!!");
-    res.sendFile(pth);
+    res.send("videochat..!!!");
+    //res.sendFile(pth);
     //res.redirect("index.html");
 });
 
