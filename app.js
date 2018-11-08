@@ -172,6 +172,41 @@ app.get("/visualize",function(req,res){
     
     });
 
+
+
+    var framecount=0;
+
+    io.on('connection',function(socket){
+       console.log("user connected..!!");
+    
+       socket.on('join',function(data){
+            socket.join(data.email);
+            console.log("ENTERED:"+data.email);
+            //var clients = io.sockets.clients();
+            //console.log(clients);
+    
+            //io.sockets.in("sandeep").emit("stream","sandeep is connected...");
+        });
+    
+    
+        socket.on('stream',function(image){
+            console.log("Streaming video image..!!!");
+            
+            //socket.broadcast.emit('stream',image).then(console.log("video send..!!1"));  
+            //io.emit('stream',image);
+    
+       framecount=framecount+1;
+       if(framecount%5==0){
+            
+            io.sockets.in(image.email).emit("stream",image);//here "sandeep"  represents room name..!!!
+       }
+    
+            console.log("video send..!!!");
+            
+        });
+    
+    });
+
 http.listen(port,hostname,function(){
     console.log("Server running at.. port "+ port);
     
