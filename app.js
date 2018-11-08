@@ -117,7 +117,7 @@ app.use(express.static(__dirname + "/public" ));
 
 
 
-/*
+
 
 
 
@@ -139,19 +139,12 @@ const server = http.createServer((req, res) => {
   console.log('Server running at http://${' + hostname + '}:${' + port + '}/');
 })
 
-*/
 
 
-app.get("/in",function(req,res){
-
-
-    res.send("my first video");
-
-   
-});
+/*
 
 
 http.listen(port,hostname,function(){
     console.log("Server running at port "+ port);
     });
-    
+    */
