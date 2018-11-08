@@ -96,30 +96,13 @@ http.listen(port,hostname,function(){
 
 
 
-
-//const http = require('http')
-var express = require("express");
-
+const http = require('http')
 const url = require('url')
-
-
-var app = new express();
-var http = require("http").Server(app);
-var io = require("socket.io")(http);
-var path=require("path");
 
 //const service = require('./service')
 
 const hostname = '0.0.0.0';
-var port = process.env.port || 3000;
-
-app.use(express.static(__dirname + "/public" ));
-
-
-
-
-
-
+const port = process.env.PORT || 3000
 
 const server = http.createServer((req, res) => {
 
@@ -127,24 +110,17 @@ const server = http.createServer((req, res) => {
 
     const path = url.parse(req.url).pathname.slice(1).replace(/%20/g, ' ')
     
-    res.writeHead(200, {'Content-Type': 'application/json'})    
+    console.log("get methods]..!!");
+    //res.writeHead(200, {'Content-Type': 'application/json'})    
     //res.write(JSON.stringify(service(path)));
-    res.write("Hello heroku from Sandeep..!!!");
-    res.write("Happy Diwali");
-    res.end();
+    //res.write("Hello heroku from Sandeep..!!!");
+    //res.write("Happy Diwali");
+    //res.end();
+  res.sendFile("./public/index.html")
+    
 
   }
 
 }).listen(port, hostname, function(){
   console.log('Server running at http://${' + hostname + '}:${' + port + '}/');
 })
-
-
-
-/*
-
-
-http.listen(port,hostname,function(){
-    console.log("Server running at port "+ port);
-    });
-    */
